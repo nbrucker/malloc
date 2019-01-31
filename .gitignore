@@ -1,0 +1,7 @@
+.idea
+.DS_Store
+objs
+libft/objs
+libft/libft.a
+malloc
+malloc.exe
