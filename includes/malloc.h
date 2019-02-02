@@ -30,9 +30,10 @@ t_map				*g_map;
 
 void				*ft_malloc(size_t size);
 void				ft_free(void *ptr);
-void				*realloc(void *ptr, size_t size);
+void				*ft_realloc(void *ptr, size_t size);
 void				show_alloc_mem(void);
 t_alloc				*is_existing_alloc(void *ptr);
 t_alloc				*split_alloc(t_alloc *alloc, size_t size);
+void				merge_alloc(t_alloc *alloc);
 
 #endif

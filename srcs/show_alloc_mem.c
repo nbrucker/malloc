@@ -43,8 +43,9 @@ void	print_map(t_map *map)
 	ft_putchar('\n');
 }
 
-void	print_alloc(t_alloc *alloc)
+void	print_alloc(t_alloc *alloc, size_t *total)
 {
+	*total = *total + alloc->size;
 	print_addr((void*)alloc + sizeof(t_alloc));
 	ft_putstr(" - ");
 	print_addr((void*)alloc + sizeof(t_alloc) + alloc->size);
@@ -70,8 +71,7 @@ void	show_alloc_mem(void)
 		while (alloc)
 		{
 			if (alloc->free == 0)
-				print_alloc(alloc);
-			total += alloc->size;
+				print_alloc(alloc, &total);
 			alloc = alloc->next;
 		}
 		map = map->previous;
