@@ -1,1 +1,0 @@
-#include "malloc.h"int		main(void){	void *ptr;	void *ptr2;	ptr = ft_malloc(1000);	ptr2 = ft_malloc(1000);	show_alloc_mem();	ft_free(ptr);	show_alloc_mem();	ptr = ft_realloc(ptr2, 999);	show_alloc_mem();	return (0);}

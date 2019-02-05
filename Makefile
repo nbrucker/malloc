@@ -1,4 +1,10 @@
-NAME = malloc
+ifeq ($(HOSTTYPE),)
+	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
+endif
+
+NAME = libft_malloc_$(HOSTTYPE).so
+
+LINK = libft_malloc.so
 
 LIBFTDIR = libft/
 
@@ -12,8 +18,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = 	main.c \
-		malloc.c \
+SRCS =  malloc.c \
 		free.c \
 		realloc.c \
 		show_alloc_mem.c
@@ -22,13 +27,14 @@ OBJS = $(addprefix $(OBJSDIR),$(SRCS:.c=.o))
 
 $(OBJSDIR)%.o: $(SRCSDIR)%.c
 	mkdir -p $(OBJSDIR)
-	$(CC) $(CFLAGS) -I $(INCSDIR) -I $(LIBFTDIR)$(INCSDIR) -o $@ -c $<
+	$(CC) $(CFLAGS) -fPIC -I $(INCSDIR) -I $(LIBFTDIR)$(INCSDIR) -o $@ -c $<
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C $(LIBFTDIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L./libft -lft
+	$(CC) $(CFLAGS) -shared -o $(NAME) $(OBJS) -L./libft -lft
+	ln -s $(NAME) $(LINK)
 
 clean:
 	rm -rf $(OBJSDIR)
@@ -36,6 +42,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	rm -rf $(LINK)
 	make -C $(LIBFTDIR) fclean
 
 re: fclean all

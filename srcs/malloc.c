@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   malloc.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nbrucker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/05 18:04:57 by nbrucker          #+#    #+#             */
+/*   Updated: 2019/02/05 18:04:58 by nbrucker         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "malloc.h"
 
 t_alloc	*create_alloc(void *addr, size_t size)
@@ -74,13 +86,16 @@ size_t	get_map_size(size_t size, size_t type)
 
 	i = 0;
 	if (type == TINY)
-		while (i * getpagesize() < ((TINY + sizeof(t_alloc)) * 100) + sizeof(t_map))
+		while (i * getpagesize() < ((TINY + sizeof(t_alloc)) * 100)
+			+ sizeof(t_map))
 			i++;
 	else if (type == SMALL)
-		while (i * getpagesize() < ((SMALL + sizeof(t_alloc)) * 100) + sizeof(t_map))
+		while (i * getpagesize() < ((SMALL + sizeof(t_alloc)) * 100)
+			+ sizeof(t_map))
 			i++;
 	else
-		while (i * getpagesize() < ((size + sizeof(t_alloc)) * 1) + sizeof(t_map))
+		while (i * getpagesize() < ((size + sizeof(t_alloc)) * 1)
+			+ sizeof(t_map))
 			i++;
 	return (getpagesize() * i);
 }
@@ -142,7 +157,7 @@ void	*get_from_existing_map(size_t size)
 	return (NULL);
 }
 
-void	*ft_malloc(size_t size)
+void	*malloc(size_t size)
 {
 	void	*addr;
 

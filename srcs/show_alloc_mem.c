@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   show_alloc_mem.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nbrucker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/05 18:05:14 by nbrucker          #+#    #+#             */
+/*   Updated: 2019/02/05 18:05:14 by nbrucker         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "malloc.h"
 #include "libft.h"
 
 void	print_addr(void *ptr)
 {
 	unsigned long long	nbr;
-	int 				tmp;
+	int					tmp;
 	char				buf[4096];
-	int 				i;
+	int					i;
 
 	nbr = (unsigned long long)ptr;
 	ft_putstr("0x");
@@ -23,11 +35,10 @@ void	print_addr(void *ptr)
 		nbr /= 16;
 		i++;
 	}
-	i--;
-	while (i >= 0)
+	while (i > 0)
 	{
-		ft_putchar(buf[i]);
 		i--;
+		ft_putchar(buf[i]);
 	}
 }
 
@@ -62,8 +73,6 @@ void	show_alloc_mem(void)
 
 	total = 0;
 	map = g_map;
-	while (map->next)
-		map = map->next;
 	while (map)
 	{
 		print_map(map);
@@ -74,7 +83,7 @@ void	show_alloc_mem(void)
 				print_alloc(alloc, &total);
 			alloc = alloc->next;
 		}
-		map = map->previous;
+		map = map->next;
 	}
 	ft_putstr("Total : ");
 	ft_putnbr(total);

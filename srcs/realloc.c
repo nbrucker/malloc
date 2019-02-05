@@ -1,22 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   realloc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nbrucker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/05 18:05:08 by nbrucker          #+#    #+#             */
+/*   Updated: 2019/02/05 18:05:08 by nbrucker         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "malloc.h"
 
-void	*create_new_alloc_cp(void *ptr, size_t size)
+void	*create_new_alloc_cp(void *ptr, size_t size, size_t n)
 {
 	char	*src;
-	char 	*dst;
+	char	*dst;
 	size_t	i;
 
 	src = (char*)ptr;
-	dst = (char*)ft_malloc(size);
+	dst = (char*)malloc(size);
 	if (dst == NULL)
 		return (NULL);
 	i = 0;
-	while (i < size)
+	while (i < size && i < n)
 	{
 		dst[i] = src[i];
 		i++;
 	}
-	ft_free(ptr);
+	free(ptr);
 	return ((void*)dst);
 }
 
@@ -33,11 +45,13 @@ void	change_next_size(t_alloc *alloc, size_t size, int diff)
 	alloc->size = size;
 }
 
-void	*ft_realloc(void *ptr, size_t size)
+void	*realloc(void *ptr, size_t size)
 {
 	t_alloc	*alloc;
 	int		diff;
 
+	if (ptr == NULL)
+		return (malloc(size));
 	alloc = is_existing_alloc(ptr);
 	if (size < 1 || alloc == NULL)
 		return (NULL);
@@ -56,5 +70,5 @@ void	*ft_realloc(void *ptr, size_t size)
 		return ((void*)alloc + sizeof(t_alloc));
 	}
 	else
-		return (create_new_alloc_cp(ptr, size));
+		return (create_new_alloc_cp(ptr, size, alloc->size));
 }

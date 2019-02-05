@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nbrucker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/05 18:04:52 by nbrucker          #+#    #+#             */
+/*   Updated: 2019/02/05 18:04:53 by nbrucker         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "malloc.h"
 
 t_alloc	*is_existing_alloc(void *ptr)
@@ -90,7 +102,7 @@ void	remove_map(t_map *map)
 	munmap((void*)map, map->size + sizeof(t_map));
 }
 
-void	ft_free(void *ptr)
+void	free(void *ptr)
 {
 	t_alloc	*alloc;
 	t_map	*map;

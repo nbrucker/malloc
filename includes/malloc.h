@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   malloc.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nbrucker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/05 18:04:17 by nbrucker          #+#    #+#             */
+/*   Updated: 2019/02/05 18:04:26 by nbrucker         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MALLOC_H
 # define MALLOC_H
 
-#include <stdio.h>
 # include <unistd.h>
 # include <sys/mman.h>
 
@@ -28,9 +39,9 @@ typedef struct		s_alloc
 
 t_map				*g_map;
 
-void				*ft_malloc(size_t size);
-void				ft_free(void *ptr);
-void				*ft_realloc(void *ptr, size_t size);
+void				*malloc(size_t size);
+void				free(void *ptr);
+void				*realloc(void *ptr, size_t size);
 void				show_alloc_mem(void);
 t_alloc				*is_existing_alloc(void *ptr);
 t_alloc				*split_alloc(t_alloc *alloc, size_t size);
