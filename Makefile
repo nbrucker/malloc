@@ -21,7 +21,8 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS =  malloc.c \
 		free.c \
 		realloc.c \
-		show_alloc_mem.c
+		show_alloc_mem.c \
+		tools.c
 
 OBJS = $(addprefix $(OBJSDIR),$(SRCS:.c=.o))
 

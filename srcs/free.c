@@ -12,26 +12,6 @@
 
 #include "malloc.h"
 
-t_alloc	*is_existing_alloc(void *ptr)
-{
-	t_map	*map;
-	t_alloc	*alloc;
-
-	map = g_map;
-	while (map)
-	{
-		alloc = map->alloc;
-		while (alloc)
-		{
-			if ((void*)alloc + sizeof(t_alloc) == ptr)
-				return (alloc);
-			alloc = alloc->next;
-		}
-		map = map->next;
-	}
-	return (NULL);
-}
-
 t_map	*get_map_from_alloc(t_alloc *search)
 {
 	t_map	*map;

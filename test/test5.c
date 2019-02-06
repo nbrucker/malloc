@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test5.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nbrucker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/06 13:47:49 by nbrucker          #+#    #+#             */
+/*   Updated: 2019/02/06 13:47:50 by nbrucker         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/malloc.h"
 #include <string.h>
 
 #define M (1024*1024)
 
-void print(char *s)
+void	print(char *s)
 {
 	write(1, s, strlen(s));
 }
 
 int		main(void)
 {
-	char *addr;
-	
+	char	*addr;
+
 	addr = malloc(16);
 	free(NULL);
 	free((void*)addr + 5);

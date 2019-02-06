@@ -43,8 +43,11 @@ void				*malloc(size_t size);
 void				free(void *ptr);
 void				*realloc(void *ptr, size_t size);
 void				show_alloc_mem(void);
+
 t_alloc				*is_existing_alloc(void *ptr);
 t_alloc				*split_alloc(t_alloc *alloc, size_t size);
-void				merge_alloc(t_alloc *alloc);
+t_map				*create_map(size_t size, int type);
+int					get_type(size_t size);
+size_t				get_map_size(size_t size, size_t type);
 
 #endif
