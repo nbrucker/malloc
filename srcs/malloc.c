@@ -16,7 +16,7 @@ t_alloc	*split_alloc(t_alloc *alloc, size_t size)
 {
 	t_alloc	*new;
 
-	if (alloc->size == size)
+	if (alloc->size == size - sizeof(t_alloc))
 		return (alloc);
 	else if (alloc->size < size)
 		return (NULL);
@@ -53,7 +53,7 @@ void	*get_new(size_t size)
 
 t_alloc	*get_from_existing_alloc(t_alloc *alloc, size_t size)
 {
-	while (alloc->previous)
+	while (alloc && alloc->previous)
 		alloc = alloc->previous;
 	while (alloc)
 	{

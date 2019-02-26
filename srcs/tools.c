@@ -37,7 +37,7 @@ size_t	get_map_size(size_t size, size_t type)
 {
 	size_t	i;
 
-	i = 0;
+	i = 1;
 	if (type == TINY)
 		while (i * getpagesize() < ((TINY + sizeof(t_alloc)) * 100)
 			+ sizeof(t_map))
@@ -72,7 +72,7 @@ t_map	*create_map(size_t size, int type)
 		g_map = new;
 	else
 	{
-		while (map->next)
+		while (map && map->next)
 			map = map->next;
 		map->next = new;
 		new->previous = map;

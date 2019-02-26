@@ -35,11 +35,13 @@ void	*create_new_alloc_cp(void *ptr, size_t size, size_t n)
 void	change_next_size(t_alloc *alloc, size_t size, int diff)
 {
 	t_alloc		*safe;
+	size_t		safe_size;
 
 	safe = alloc->next;
+	safe_size = safe->size;
 	alloc->next = (void*)alloc->next + diff;
 	alloc->next->next = safe->next;
-	alloc->next->size = alloc->next->size - diff;
+	alloc->next->size = safe_size - diff;
 	alloc->next->free = 1;
 	alloc->next->previous = alloc;
 	alloc->size = size;
@@ -57,17 +59,17 @@ void	*realloc(void *ptr, size_t size)
 		return (NULL);
 	diff = size - alloc->size;
 	if (diff == 0)
-		return ((void*)alloc + sizeof(t_alloc));
+		return (ptr);
 	else if (diff < 0 && alloc->size - size >= sizeof(t_alloc))
 	{
 		split_alloc(alloc, alloc->size - size);
-		return ((void*)alloc + sizeof(t_alloc));
+		return (ptr);
 	}
-	else if (alloc->next && alloc->next->free == 1
+	else if (diff > 0 && alloc->next && alloc->next->free == 1
 	&& (int)alloc->next->size >= diff)
 	{
 		change_next_size(alloc, size, diff);
-		return ((void*)alloc + sizeof(t_alloc));
+		return (ptr);
 	}
 	else
 		return (create_new_alloc_cp(ptr, size, alloc->size));

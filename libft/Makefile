@@ -18,8 +18,7 @@ SRCSDIR = srcs/
 
 OBJSDIR = objs/
 
-SRCS = 	ft_error.c \
-		ft_putchar.c \
+SRCS = 	ft_putchar.c \
 		ft_putstr.c \
 		ft_putendl.c \
 		ft_putnbr.c

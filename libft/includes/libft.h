@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-void	ft_error(char *str);
 void	ft_putendl(char const *s);
 void	ft_putchar(char c);
 void	ft_putstr(char const *s);

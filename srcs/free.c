@@ -95,14 +95,7 @@ void	free(void *ptr)
 	map = get_map_from_alloc(alloc);
 	if (map == NULL)
 		return ;
-	if (map->type != LARGE)
-		merge_alloc(alloc);
-	else
-	{
-		alloc->free = 1;
-		if (are_all_free(map) == 1)
-			remove_map(map);
-		else
-			merge_alloc(alloc);
-	}
+	merge_alloc(alloc);
+	if (map->type == LARGE && are_all_free(map) == 1)
+		remove_map(map);
 }
