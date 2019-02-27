@@ -93,7 +93,7 @@ void	*malloc(size_t size)
 {
 	void	*addr;
 
-	if (size < 1)
+	if ((int)size < 1)
 		return (NULL);
 	addr = get_from_existing_map(size);
 	if (addr)

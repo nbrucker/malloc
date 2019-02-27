@@ -35,15 +35,14 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	make -C $(LIBFTDIR)
 	$(CC) $(CFLAGS) -shared -o $(NAME) $(OBJS) -L./libft -lft
-	ln -s $(NAME) $(LINK)
+	ln -sf $(NAME) $(LINK)
 
 clean:
 	rm -rf $(OBJSDIR)
 	make -C $(LIBFTDIR) clean
 
 fclean: clean
-	rm -rf $(NAME)
-	rm -rf $(LINK)
+	rm -rf $(NAME) $(LINK)
 	make -C $(LIBFTDIR) fclean
 
 re: fclean all

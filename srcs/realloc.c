@@ -55,7 +55,7 @@ void	*realloc(void *ptr, size_t size)
 	if (ptr == NULL)
 		return (malloc(size));
 	alloc = is_existing_alloc(ptr);
-	if (size < 1 || alloc == NULL)
+	if ((int)size < 1 || alloc == NULL)
 		return (NULL);
 	diff = size - alloc->size;
 	if (diff == 0)
