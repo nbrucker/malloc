@@ -16,7 +16,7 @@ OBJSDIR = objs/
 
 CC = gcc
 
-CFLAGS = -Wpadded -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS =  malloc.c \
 		free.c \
