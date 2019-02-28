@@ -51,50 +51,14 @@ void	*get_new(size_t size)
 	return ((void*)alloc + sizeof(t_alloc));
 }
 
-t_alloc	*get_from_existing_alloc(t_alloc *alloc, size_t size)
-{
-	while (alloc && alloc->previous)
-		alloc = alloc->previous;
-	while (alloc)
-	{
-		if (alloc->size >= size + sizeof(t_alloc) && alloc->free == 1)
-			return (split_alloc(alloc, size + sizeof(t_alloc)));
-		alloc = alloc->next;
-	}
-	return (NULL);
-}
-
-void	*get_from_existing_map(size_t size)
-{
-	int		type;
-	t_map	*map;
-	t_alloc	*alloc;
-
-	type = get_type(size);
-	map = g_map;
-	alloc = NULL;
-	while (map)
-	{
-		if (map->type == type)
-		{
-			alloc = get_from_existing_alloc(map->alloc, size);
-			if (alloc)
-			{
-				alloc->free = 0;
-				return ((void*)alloc + sizeof(t_alloc));
-			}
-		}
-		map = map->next;
-	}
-	return (NULL);
-}
-
-void	*malloc(size_t size)
+void	*ft_malloc(size_t size)
 {
 	void	*addr;
 
 	if ((int)size < 1)
 		return (NULL);
+	while (size % 16 != 0)
+		size++;
 	addr = get_from_existing_map(size);
 	if (addr)
 		return (addr);
@@ -102,4 +66,19 @@ void	*malloc(size_t size)
 	if (addr)
 		return (addr);
 	return (NULL);
+}
+
+void	*malloc(size_t size)
+{
+	void	*ret;
+
+	if (g_lock == 0)
+	{
+		g_lock = 1;
+		ret = ft_malloc(size);
+		g_lock = 0;
+		return (ret);
+	}
+	else
+		return (NULL);
 }

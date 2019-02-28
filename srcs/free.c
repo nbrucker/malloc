@@ -12,26 +12,6 @@
 
 #include "malloc.h"
 
-t_map	*get_map_from_alloc(t_alloc *search)
-{
-	t_map	*map;
-	t_alloc	*alloc;
-
-	map = g_map;
-	while (map)
-	{
-		alloc = map->alloc;
-		while (alloc)
-		{
-			if (alloc == search)
-				return (map);
-			alloc = alloc->next;
-		}
-		map = map->next;
-	}
-	return (NULL);
-}
-
 void	merge_alloc(t_alloc *alloc)
 {
 	t_alloc	*next;
@@ -82,7 +62,7 @@ void	remove_map(t_map *map)
 	munmap((void*)map, map->size + sizeof(t_map));
 }
 
-void	free(void *ptr)
+void	ft_free(void *ptr)
 {
 	t_alloc	*alloc;
 	t_map	*map;
@@ -98,4 +78,14 @@ void	free(void *ptr)
 	merge_alloc(alloc);
 	if (map->type == LARGE && are_all_free(map) == 1)
 		remove_map(map);
+}
+
+void	free(void *ptr)
+{
+	if (g_lock == 0)
+	{
+		g_lock = 1;
+		ft_free(ptr);
+		g_lock = 0;
+	}
 }

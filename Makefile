@@ -16,13 +16,16 @@ OBJSDIR = objs/
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wpadded -Wall -Wextra -Werror
 
 SRCS =  malloc.c \
 		free.c \
 		realloc.c \
 		show_alloc_mem.c \
-		tools.c
+		tools.c \
+		reallocf.c \
+		calloc.c \
+		tools2.c
 
 OBJS = $(addprefix $(OBJSDIR),$(SRCS:.c=.o))
 

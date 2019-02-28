@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test0.c                                            :+:      :+:    :+:   */
+/*   reallocf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbrucker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/28 18:49:25 by nbrucker          #+#    #+#             */
-/*   Updated: 2019/02/28 18:49:25 by nbrucker         ###   ########.fr       */
+/*   Created: 2019/02/28 18:34:13 by nbrucker          #+#    #+#             */
+/*   Updated: 2019/02/28 18:34:13 by nbrucker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "malloc.h"
 
-int		main(void)
+void	*ft_reallocf(void *ptr, size_t size)
 {
-	int		i;
-	char	*addr;
+	void *ret;
 
-	i = 0;
-	while (i < 1024)
+	if (!(ret = ft_realloc(ptr, size)))
 	{
-		i++;
+		ft_free(ptr);
+		return (NULL);
 	}
-	return (0);
+	return (ret);
+}
+
+void	*reallocf(void *ptr, size_t size)
+{
+	void	*ret;
+
+	if (g_lock == 0)
+	{
+		g_lock = 1;
+		ret = ft_reallocf(ptr, size);
+		g_lock = 0;
+		return (ret);
+	}
+	else
+		return (NULL);
 }

@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test0.c                                            :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbrucker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nbrucker <nbrucker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/28 18:49:25 by nbrucker          #+#    #+#             */
-/*   Updated: 2019/02/28 18:49:25 by nbrucker         ###   ########.fr       */
+/*   Created: 2017/12/02 19:25:43 by nbrucker          #+#    #+#             */
+/*   Updated: 2017/12/02 19:25:43 by nbrucker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-int		main(void)
+void	ft_bzero(void *s, size_t n)
 {
-	int		i;
-	char	*addr;
+	size_t	i;
+	char	*str;
 
+	str = (char*)s;
 	i = 0;
-	while (i < 1024)
+	while (i < n)
 	{
+		str[i] = 0;
 		i++;
 	}
-	return (0);
 }
