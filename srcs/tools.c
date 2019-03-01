@@ -47,7 +47,7 @@ size_t	get_map_size(size_t size, size_t type)
 			+ sizeof(t_map))
 			i++;
 	else
-		while (i * getpagesize() < ((size + sizeof(t_alloc)) * 1)
+		while (i * getpagesize() < ((size + sizeof(t_alloc) * 2) * 1)
 			+ sizeof(t_map))
 			i++;
 	return (getpagesize() * i);
