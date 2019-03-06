@@ -18,6 +18,8 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
+HEADERS = malloc.h
+
 SRCS =  malloc.c \
 		free.c \
 		realloc.c \
@@ -29,7 +31,7 @@ SRCS =  malloc.c \
 
 OBJS = $(addprefix $(OBJSDIR),$(SRCS:.c=.o))
 
-$(OBJSDIR)%.o: $(SRCSDIR)%.c
+$(OBJSDIR)%.o: $(SRCSDIR)%.c $(addprefix $(INCSDIR),$(HEADERS))
 	mkdir -p $(OBJSDIR)
 	$(CC) $(CFLAGS) -fPIC -I $(INCSDIR) -I $(LIBFTDIR)$(INCSDIR) -o $@ -c $<
 
