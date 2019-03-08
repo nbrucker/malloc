@@ -41,7 +41,6 @@ typedef struct		s_alloc
 }					t_alloc;
 
 t_map				*g_map;
-int					g_lock;
 
 void				show_alloc_mem(void);
 

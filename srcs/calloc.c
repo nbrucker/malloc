@@ -13,7 +13,7 @@
 #include "malloc.h"
 #include "libft.h"
 
-void		*ft_calloc(size_t nmemb, size_t size)
+void		*calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
 	size_t	x;
@@ -25,23 +25,8 @@ void		*ft_calloc(size_t nmemb, size_t size)
 	x = nmemb * size;
 	while (x % 16 != 0)
 		x++;
-	ptr = ft_malloc(x);
+	ptr = malloc(x);
 	if (ptr)
 		ft_bzero(ptr, x);
 	return (ptr);
-}
-
-void		*calloc(size_t nmemb, size_t size)
-{
-	void	*ret;
-
-	if (g_lock == 0)
-	{
-		g_lock = 1;
-		ret = ft_calloc(nmemb, size);
-		g_lock = 0;
-		return (ret);
-	}
-	else
-		return (NULL);
 }

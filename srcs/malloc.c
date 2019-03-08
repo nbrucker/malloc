@@ -51,7 +51,7 @@ void	*get_new(size_t size)
 	return ((void*)alloc + sizeof(t_alloc));
 }
 
-void	*ft_malloc(size_t size)
+void	*malloc(size_t size)
 {
 	void	*addr;
 
@@ -66,19 +66,4 @@ void	*ft_malloc(size_t size)
 	if (addr)
 		return (addr);
 	return (NULL);
-}
-
-void	*malloc(size_t size)
-{
-	void	*ret;
-
-	if (g_lock == 0)
-	{
-		g_lock = 1;
-		ret = ft_malloc(size);
-		g_lock = 0;
-		return (ret);
-	}
-	else
-		return (NULL);
 }

@@ -62,7 +62,7 @@ void	remove_map(t_map *map)
 	munmap((void*)map, map->size + sizeof(t_map));
 }
 
-void	ft_free(void *ptr)
+void	free(void *ptr)
 {
 	t_alloc	*alloc;
 	t_map	*map;
@@ -78,14 +78,4 @@ void	ft_free(void *ptr)
 	merge_alloc(alloc);
 	if (map->type == LARGE && are_all_free(map) == 1)
 		remove_map(map);
-}
-
-void	free(void *ptr)
-{
-	if (g_lock == 0)
-	{
-		g_lock = 1;
-		ft_free(ptr);
-		g_lock = 0;
-	}
 }

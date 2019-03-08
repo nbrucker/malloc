@@ -19,7 +19,7 @@ void	*create_new_alloc_cp(void *ptr, size_t size, size_t n)
 	size_t	i;
 
 	src = (char*)ptr;
-	dst = (char*)ft_malloc(size);
+	dst = (char*)malloc(size);
 	if (dst == NULL)
 		return (NULL);
 	i = 0;
@@ -28,7 +28,7 @@ void	*create_new_alloc_cp(void *ptr, size_t size, size_t n)
 		dst[i] = src[i];
 		i++;
 	}
-	ft_free(ptr);
+	free(ptr);
 	return ((void*)dst);
 }
 
@@ -47,13 +47,13 @@ void	change_next_size(t_alloc *alloc, size_t size, int diff)
 	alloc->size = size;
 }
 
-void	*ft_realloc(void *ptr, size_t size)
+void	*realloc(void *ptr, size_t size)
 {
 	t_alloc	*alloc;
 	int		diff;
 
 	if (ptr == NULL)
-		return (ft_malloc(size));
+		return (malloc(size));
 	if ((int)size < 1 || (alloc = is_existing_alloc(ptr)) == NULL)
 		return (NULL);
 	while (size % 16 != 0)
@@ -74,19 +74,4 @@ void	*ft_realloc(void *ptr, size_t size)
 	}
 	else
 		return (create_new_alloc_cp(ptr, size, alloc->size));
-}
-
-void	*realloc(void *ptr, size_t size)
-{
-	void	*ret;
-
-	if (g_lock == 0)
-	{
-		g_lock = 1;
-		ret = ft_realloc(ptr, size);
-		g_lock = 0;
-		return (ret);
-	}
-	else
-		return (NULL);
 }
