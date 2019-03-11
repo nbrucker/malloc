@@ -44,10 +44,6 @@ t_map				*g_map;
 
 void				show_alloc_mem(void);
 
-void				*ft_malloc(size_t size);
-void				ft_free(void *ptr);
-void				*ft_realloc(void *ptr, size_t size);
-
 t_alloc				*is_existing_alloc(void *ptr);
 t_alloc				*split_alloc(t_alloc *alloc, size_t size);
 t_map				*create_map(size_t size, int type);
